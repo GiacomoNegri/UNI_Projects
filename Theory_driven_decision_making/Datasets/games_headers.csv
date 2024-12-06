@@ -1,0 +1,89 @@
+Game,Theory,"focal attribute",attributes
+"Southwest Airlines",1,"Low Cost Airline","Low Fares","Customer Satisfaction","Low Operating Cost","On Time","Labour Productivity","Point to Point","People Mgmt"
+"Southwest Airlines",2,"Global Airline",Alliances,"Scale of Operation","Brand & Marketing",Deregulation,"Capital Availability"
+Meta,1,"Number of Avatars","AR-VR Usage","Meta Investment","AI Technology","Data Security",Competition
+Meta,2,"Metaverse GDP","AI Techs",Blockchain,Engagement
+Luxottica,1,"Medical Eye Glasses","Economies of Scale","Direct Distribution","Increase of Eyesight Defects","Low Price","Rise of Eye Surgery"
+Luxottica,2,"Fashion Eye Wear","Fashion Designers as Trend Setters","Ability to Design and Produce Eyewear","Global Customer","Global Supply Chain","Control of Retail"
+"Amazon Web Services",1,"Data Storage Business","Data Storage Technology",Competition
+"Amazon Web Services",2,"Web Service Business","Web Service Technology","Platform Adoption"
+SpaceX,1,"Greenhouse on Mars","Public Interest",NASA,Rockets
+SpaceX,2,"Space Travel","Space Tourism","Mission Cost Reduction","Reusable Technology","Vertical Integration"
+PayPal,1,"Data security business on PDAs","Diffusion of handheld devices ","Innovative encryption software ","Need for data security"
+PayPal,2,"Digital payments","Rise of Internet Economy","Need for Efficient & Secure Financial Transactions","Encryption Technology"
+Netflix,1,"Market Dominance",Availability,Speed,Reliability,"Geographical Presence","Distribution System"
+Netflix,2,"Reinvent Entertainment","On-demand Content","Streaming Tech",Connectivity,"Mobile Adoption","Tailored Content",Algorithm
+Adobe,1,"Printing Revolution","Device Independent Interpreter ","Open Standard","Laser Printers","Licensing Agreements for Fonts"
+Adobe,2,Digitalization,"Creative Suite",Internal,External,"Computing Power"
+Carlyle,1,"Valuation Within Expected Range","Macroeconomic Stability","Market Stability",Stakeholders,"Competitor Listings"
+Carlyle,2,"Successful Exit","Contracted Price","Lock-up Upside",Liquidity,"Dominant Position",Matching
+Hewlett-Packard,1,"Better Together","Integrated Solutions","Economies of Scale","Strong Brand"
+Hewlett-Packard,2,Spinout,"Diverging Trends","Matching Investors","Enterprise Alliances","Market Response"
+Nokia,1,"Market Share","Investment Focus","Org Restructure","Brand Perception","Samsung's Advantage"
+Nokia,2,"Global Mobile Ecosystem","Partnership Synergies","Faster Development","Technology Integration","Perceived Trust","Differentiated Ecosystem"
+Boeing,1,"Hub & Spoke Resurgence","Market Stability","Hub Operations","Fuel Prices","Comfort Sensitivity"
+Boeing,2,"P2P Dominance","Aircraft Technology","Fuel Prices","Comfort Sensitivity","Market Demand"
+Marvel,1,"Value Appropriation",Reach,Partners,Quality,Monetization
+Marvel,2,"Cinematic Universe",Financing,"In-house Talent",Cross-over,"Character Pipeline",Sequels,"Long-Term Fans"
+Geox,1,"Global Brand","Process Upgrade",Quality,Productivity,"Global Recognition"
+Geox,2,"Market Breathable ","Patent Efficacy","Incumbent Response","Consumer Reception",Design,"System Efficiency"
+Danaher,1,"Danaher Abnormal Returns","Leveraged Buy-Outs","Low-Profile Acquisitions","Danaher Business System",Competition
+Danaher,2,"Abnormal Returns","Non-Cyclical Targets","Margin Targets",DBS
+WeChat,1,"Messaging and Social Networking",Smartphones,"Information Technology","Software Applications",Competition
+WeChat,2,Super-App,Smartphone,"User Time Spent","Multiple Technologies"
+"Intel Centrino",1,"Laptop Commoditization","Standard WiFi chips","Energy Efficiency","Increased Competition","WiFi Reliability"
+"Intel Centrino",2,"New Standard","Strategic Partnerships","Product Integration","Market Expansion"
+Lego,1,Profitability,"Design Simplicity","Org Efficiency","Business Concentration","Cross-functional Coordination"
+Lego,2,"Community Driven Brand","Fan Willingness","Community Integration","Digital-Physical Synergy",Transparency
+IBM,1,"Integrated Technology Solutions","Network Integration","Market Demand","Internet Usage","Process Transition","Competition Intensity"
+IBM,2,"De-centralized Company","Control Systems",Competition,"Tech Disruption","Responsive to Customers"
+Kodak,1,"Gradual Digital Transition","Prefer to Print","Hybrid Tech","Photo Quality","Cultural Change",Globalization
+Kodak,2,"Rapid Digital Transition","Preference for Digital","Personal Devices","Digital Advances","Digital Capabilities"
+Booking.com,1,"Profitable Online Marketing Space","Internet Adoption","Online Advertising Willingness","Granular Offering",Acceptance
+Booking.com,2,"Travel Platform","Hotel Engagement","User Engagement","Revenue Model","Data Flow","Online Payment Technology","Online Purchasing Habits"
+Spotify,1,"Legal Music Download","Illegal Alternatives Dismissal",Regulation,Partners,"Profit Model",Awareness
+Spotify,2,"Music Streaming","Music Producers",Connectivity,Infrastructure,"Streaming Technology","Revenue Model","Network Effects","User Adoption"
+Porsche,1,"Exclusive Segment","Mid-Price Competition","High-End Customers","Engineering Performance","Motor Racing"
+Porsche,2,"Leading Player","Operational Excellence","Product Diversification","Efficiency at Scale","Brand Image"
+BP,1,"Net zero oil giant","Eco Awareness","Carbon Regulations","Oil Demand Trends","Fossil Tech Improvement","Green Energy Progress","Carbon Reduction Initiatives"
+BP,2,"Green Energy Leader","ESG Awareness","Carbon Regulations","Green Tech Improvement","Green Tech Adoption","Shareholder Agreement"
+Revolut,1,"Neobank Leader","Customer Trust","Customer Experience","Neobank Compliance",Competition
+Revolut,2,"Global Super-App","Customer Trust","Customer Adoption","Regulatory Compliance","Global Expansion","Technical Integration"
+OpenAI,1,"Ethical AI","Capital Attraction","Recruitment Efficacy","AI Alignment","Regulatory Oversight"
+OpenAI,2,"High-growth AI leadership","Computing Costs","Board Buy-in","AI Adoption","Competitive Pressure","Development Capabilities"
+Toyota,1,"BEV Dominance","Tech Progress","Consumer Demand","Economic Factors",Regulations,"Lithium Supply"
+Toyota,2,"Multitech Powertrains","Hybrid Technology","Environmental Impact","Consumer Preferences","Regulatory Pressure","Lithium Shortage"
+Google,1,"All-Media Ecosystem","Online Video Growth",Integration,"Content Quality","Tech Advances","Competitor Response"
+Google,2,"Accelerated Growth","Cultural Integration","Search Integration","User Data Synergies","Competitive Edge","Content Growth","Original Content Creation"
+"Red Bull",1,"Successful Red Bull Founder","Competitor Response","Product Distinction","Product Adaptation","Brand Perception"
+"Red Bull",2,"Corporate Success",Performance,Relationships,Visibility,"Opportunity and Timing"
+Apple,1,"Secure User Experience","System Stability",Jailbreaking,"Web Standards"
+Apple,2,"Dedicated Software Ecosystem","SDK Quality","App Standards","Developer Relations",Marketplace
+"Epic Games",1,"Leading Game Ecosystem","Players as Developers","Attracting Developers","Product Uniqueness"
+"Epic Games",2,"Successful Metaverse","Virtual Transactions","Common Standard","User Engagement","Virtual Substitution"
+Grammarly,1,"Successful Plagiarism Solution","Data Access","Plagiarism Technology","University Partnerships","Large Target Market"
+Grammarly,2,"Profitable Writing Tool","Information Security","User Trust","Willingness to Pay","AI Technology"
+CitiCorp,1,"Diversified Leader","Financial Deregulation","Growth in Financial Services",M&As
+CitiCorp,2,"Consumer Bank","Customer-oriented culture ",ATMs,Depositors-as-customers
+"Booking.com 2.0",1,"Accommodation-Only Platform","Market Trends",Competitors,Substitutes,"Customer Loyalty"
+"Booking.com 2.0",2,"Full-Service Platform",Partners,"Optimized Offering",Algorithm,"Consumer Habits"
+Klarna,1,"Successful Klarna Founder","Technical Recruiting","Investor Support","E-Commerce Rise","Consumer Credit Worthiness","Merchant Trust"
+Klarna,2,"Successful Investment Banker",Prejudice,"Top Tier Job","Job Enrichment"
+Calm,1,"Successful Meditation App","Meditation Perception","Frictionless Experience","Mental Fatigue",Monetize,"Widespread Freneticism"
+Calm,2,"Sleep Meditation App",Trust,"Sleep Awareness","Relative Efficacy",Celebrities
+Baidu,1,"Driverless Car","Open Ecosystem",Data,"Personalized Experience","Car Maker Involvement","Driverless Technology","Autonomous Driving Regulation"
+Baidu,2,"Leading AI Chip Provider","Internal Chip Design",Partners,"Computing Performance","General Purpose Technology","Domestic Competition"
+Farfetch,1,"Global Luxury Platform","Brand Identity","Boutique Partnership","Logistic Tech Integration"
+Farfetch,2,"Leading Luxury Boutique","Designer Relationships","Brand Heritage","Offline Experience"
+Nvidia,1,"Gaming GPU Leader ","New Customer Lock-in","Brand Loyalty","Developer Partnerships",Competition
+Nvidia,2,"Successful AI Company","Cross Functional Technology","Research Engagement","Technology Adoption","AI Rise","Continuous Innovation"
+ByteDance,1,"Transform Information Distribution","Information Copyright","Global Expansion","Top-notch Algotirhm",Funding
+ByteDance,2,"Leading  House-searching Platform","Information Access","Market Acceptance","Brand Perception","Market Trends"
+Uber,1,"Ride-hailing app",Competition,"Customers’ adoption ","Drivers’ adoption","On-Demand cab service","App feasibility"
+Uber,2,"Home-sharing platform ","Owners’ adoption","Customers’ adoption","Platform Feasibility"
+Pfizer,1,"Traditional Vaccine","Accelerated Development","Immune response","Virus Similarity"
+Pfizer,2,"mRNA Vaccine","Time to Market",Adaptability,Compatibility,Acceptance,"Loyal partnership"
+BMW,1,"Agency model","Phygital Customer","Intra-Brand Competition","Technological Integration","Dealership Cooperation"
+BMW,2,"Enhanced Dealership Model","Data Sharing","Technological Adaption","Dealership Communication"
+Nintendo,1,"Toy Industry Key Position","Trend Responsiveness","Traditional Toy Market Substitution","Danger Consciousness"
+Nintendo,2,"Video Entertainment Ecosystem ","Market Potential","Technological Expertise","Industry Competition","Long-term Fanbase","Iconic Character Creation"

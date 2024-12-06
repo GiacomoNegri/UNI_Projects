@@ -1,0 +1,406 @@
+---
+title: "241007_DataAnalysis_2"
+author: "Giacomo Negri"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(lubridate)
+library(jsonlite)
+library(stringr)
+library(psych)
+library(ggcorrplot)
+
+#Setting the Working Directory
+#setwd("C:/Users/Lenovo/Documents/SCUOLA/UNI/MASTER/1ANNO/20595-BUSINESS ANALYTICS/DATA ANALYSIS")
+
+#Loading the Data
+data <- read_csv("game_records.csv")
+game_headers<- read_csv("games_headers.csv")
+
+#Checking for noisy data
+data<-data%>%
+  mutate(start_time2=ymd_hms(`start time`),
+         end_time2=ymd_hms(`finish time`),
+         time_required=end_time2-start_time2)
+
+data_theory_empty<-data%>%
+  filter(data[5]=='[]')%>%
+  select(time_required)
+
+cat("Mean time required for those with empty Theory 1: ",mean(data_theory_empty$time_required))
+
+
+#Removing Empty Theory
+data_clean<-data%>%
+  filter(data[5]!='[]')
+
+#Computing an additional column with result as Binary
+data_clean<-data_clean%>%
+  mutate(result_binary = ifelse(`result (1 = won)` == "1,,,,,", 1, 0))
+
+#Creating new columns that count the total number of connections, both for theory 1 and 2 together and separately
+data_clean <- data_clean %>%
+  mutate(th1_connections = `Theory 1 - #used attributes` + `Theory 1 - # links`,
+         th2_connections =`Theory 2 - #used attributes`+`Theory 2 - # links`,
+         tot_connections=`Theory 1 - #used attributes` + `Theory 1 - # links`+`Theory 2 - #used attributes`+`Theory 2 - # links`)
+
+#Creating new columns that count the change in connections, attributes and links between theory 1 and 2
+data_clean<-data_clean%>%
+  mutate(tot_connections_change= th1_connections - th2_connections,
+         tot_attributes_change=`Theory 1 - #used attributes` - `Theory 2 - #used attributes`,
+         tot_links_change=`Theory 1 - # links`-`Theory 2 - # links`
+  )
+
+data_clean$tot_attributes <- data_clean$`Theory 1 - #used attributes` + data_clean$`Theory 2 - #used attributes`
+data_clean$tot_links = data_clean$`Theory 1 - # links` + data_clean$`Theory 2 - # links`
+data_clean$timediff = as.numeric(data_clean$time_required)
+```
+
+```{r}
+#Extracting the Json experiments columns
+data_clean <- data_clean %>%
+  rowwise() %>%
+  mutate(
+    experiments_done = list(fromJSON(`experiments json`)$exp),
+    
+    #extracting the first experiments
+    th_experiments_1 = case_when(
+      experiments_done[1] == "first" ~ 1,
+      experiments_done[1] == "second" ~ 2,
+      TRUE ~ NA_real_
+    ),
+    
+    #extracting the second experiments if it exists
+    th_experiments_2 = case_when(
+      length(experiments_done) > 1 & experiments_done[2] == "first" ~ 1,
+      length(experiments_done) > 1 & experiments_done[2] == "second" ~ 2,
+      TRUE ~ NA_real_
+    )
+  ) %>%
+  ungroup()
+```
+
+```{r}
+#Extraction expected
+# Assuming `experiments json` is the column containing the JSON string
+data_clean <- data_clean %>%
+  rowwise() %>%
+  mutate(
+    # Parse the JSON field into a list of objects
+    json_list = list(fromJSON(`experiments json`)$expected),
+    # Extract the 'expected' value from the last element in the JSON array
+    last_expected_value = ifelse(
+      length(json_list) > 0 && !is.null(json_list[[length(json_list)]]),
+      json_list[[length(json_list)]],
+      NA_real_
+    )
+  ) %>%
+  ungroup()
+```
+
+```{r}
+#Extracting the omegas (certain) values from the column experiments
+data_clean <- data_clean %>%
+  rowwise() %>%
+  mutate(
+    # Extract the 'certain' field from the JSON and handle the case where it's missing
+    certain_value = list(fromJSON(`experiments json`)$certain),
+    # Extract the first number from the 'first_certain_value' list
+    first_exp_fin_prob = ifelse(length(certain_value) > 0 && length(certain_value[[1]]) >= 1, 
+                                 certain_value[[length(certain_value)]][1], NA_real_),
+    second_exp_fin_prob = ifelse(
+      length(certain_value) > 0 && length(certain_value[[1]]) >= 2, certain_value[[length(certain_value)]][2],
+      TRUE ~ NA_real_
+    )
+  ) %>%
+  ungroup()
+```
+
+```{r}
+#Changing the time format
+data_clean<-data_clean%>%
+  mutate(start_time2=ymd_hms(`start time`),
+         end_time2=ymd_hms(`finish time`))
+
+#Computing the time to play the game
+data_clean<-data_clean%>%
+  mutate(time_required=end_time2-start_time2)
+```
+
+```{r}
+#Creating a table with the first theories attributes
+th_1_game_headers <- game_headers %>%
+  filter(Theory==1)%>%
+  mutate(th1_num_attributes = str_count(attributes, ",") + 1)
+
+#Creating a table with the second theories attributes
+th_2_game_headers <- game_headers %>%
+  filter(Theory==2)%>%
+  mutate(th2_num_attributes = str_count(attributes, ",") + 1)
+```
+
+```{r}
+#Join th_1_game_headers to data_clean on game_name and Game
+data_clean <- data_clean %>%
+  left_join(th_1_game_headers %>% select(Game, th1_num_attributes),
+            by = c("game name" = "Game"))
+
+#Join th_2_game_headers to data_clean on game_name and Game
+data_clean <- data_clean %>%
+  left_join(th_2_game_headers %>% select(Game, th2_num_attributes),
+            by = c("game name" = "Game"))
+```
+
+```{r}
+#Computing a summary table
+connections_results <- data_clean %>%
+  group_by(`result_binary`) %>%
+  summarise(tot_mean_connections = mean(tot_connections),
+            tot_mean_conn_change=mean(tot_connections_change),
+            tot_mean_att_change=mean(tot_attributes_change),
+            tot_mean_link_change=mean(tot_links_change),
+            th1_mean_attributes=mean(`Theory 1 - #used attributes`),
+            th1_mean_links=mean(`Theory 1 - # links`),
+            th2_mean_attributes=mean(`Theory 2 - #used attributes`),
+            th2_mean_links=mean(`Theory 2 - # links`)
+            )
+
+#Computing Correlations between factors and results
+correlation_table <- tibble(
+  cor_tot_connections = cor(data_clean$tot_connections, data_clean$result_binary, use = "complete.obs"),
+  #cor_tot_con_change = cor(data_clean$tot_connections_change, data_clean$result_binary, use = "complete.obs"),
+  cor_tot_attributes=cor(data_clean$tot_attributes,data_clean$result_binary, use="complete.obs"),
+  cor_tot_links=cor(data_clean$tot_links,data_clean$result_binary, use="complete.obs"),
+  cor_tot_time=cor(data_clean$timediff, data_clean$result_binary, use="complete.obs"),
+  #cor_tot_link_change = cor(data_clean$tot_links_change, data_clean$result_binary, use = "complete.obs"),
+  cor_th1_connections = cor(data_clean$th1_connections, data_clean$result_binary, use = "complete.obs"),
+  cor_th2_connections = cor(data_clean$th2_connections, data_clean$result_binary, use = "complete.obs"),
+  cor_th1_attributes = cor(data_clean$`Theory 1 - #used attributes`, data_clean$result_binary, use = "complete.obs"),
+  cor_th2_attributes = cor(data_clean$`Theory 2 - #used attributes`, data_clean$result_binary, use = "complete.obs"),
+  cor_th1_links = cor(data_clean$`Theory 1 - # links`, data_clean$result_binary, use = "complete.obs"),
+  cor_th2_links = cor(data_clean$`Theory 2 - # links`, data_clean$result_binary, use = "complete.obs")
+)
+```
+
+```{r}
+#Plotting the density of total connections with respect of result
+
+varlist <- c("th1_connections", "th2_connections", "tot_connections", "tot_connections_change", "tot_attributes_change", "tot_links_change","Theory 1 - # links","Theory 2 - # links","Theory 1 - #used attributes","Theory 2 - #used attributes","Theory 1 - Expected Probability","Theory 2 - Expected Probability")
+
+for (var in varlist) {
+  p <- ggplot(data_clean, aes_string(x = as.name(var), fill = "as.factor(result_binary)")) +
+    geom_density(alpha = 0.7, position = "identity") +
+    labs(x = var,
+         y = paste("Density of ",var),
+         fill = "Result (Binary)",
+         title = paste("Density Plot of", var, "Grouped by Game Result")) +
+    theme_minimal()
+
+  print(p)
+}
+```
+
+```{r}
+#Computing the correlation between Used Attributes and associated Expected Probability
+corr_att_exp_prob<-tibble(
+  cor_th1_attributes=cor(data_clean$`Theory 1 - #used attributes`,data_clean$`Theory 1 - Expected Probability`),
+  cor_th2_attributes=cor(data_clean$`Theory 2 - #used attributes`,data_clean$`Theory 2 - Expected Probability`)
+)
+```
+
+```{r}
+#Drawing a Scatter plot
+
+# Scatter plot for Theory 1
+ggplot(data_clean, aes(x = `Theory 1 - #used attributes`, y = `Theory 1 - Expected Probability`)) +
+  geom_point() +  # Scatter plot points
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +  # Fitting line (linear model)
+  labs(x = "Theory 1 - #used attributes", 
+       y = "Theory 1 - Expected Probability",
+       title = "Scatter Plot of Theory 1 - Attributes vs Expected Probability with Fitting Line") +
+  theme_minimal()
+
+# Scatter plot for Theory 2
+ggplot(data_clean, aes(x = `Theory 2 - #used attributes`, y = `Theory 2 - Expected Probability`)) +
+  geom_point() +  # Scatter plot points
+  geom_smooth(method = "lm", se = FALSE, color = "red") +  # Fitting line (linear model)
+  labs(x = "Theory 2 - #used attributes", 
+       y = "Theory 2 - Expected Probability",
+       title = "Scatter Plot of Theory 2 - Attributes vs Expected Probability with Fitting Line") +
+  theme_minimal()
+```
+
+```{r}
+#Computing the expected probabilities by number of Attributes for Theory 1
+th1_exp_att_by_attr<-data_clean%>%
+  group_by(`Theory 1 - #used attributes`)%>%
+  summarize(mean_exp_probabilities=mean(`Theory 1 - Expected Probability`),
+            var_exp_probabilities=var(`Theory 1 - Expected Probability`)
+            )
+#Computing the expected probabilities by number of Attributes for Theory 1
+th2_exp_att_by_attr<-data_clean%>%
+  group_by(`Theory 2 - #used attributes`)%>%
+  summarize(mean_exp_probabilities=mean(`Theory 2 - Expected Probability`),
+            var_exp_probabilities=var(`Theory 2 - Expected Probability`)
+            )
+```
+
+```{r}
+# Linear regression for Theory 1
+model_th1 <- lm(`Theory 1 - Expected Probability` ~ `Theory 1 - #used attributes`, data = data_clean)
+
+# Summary of the model
+summary(model_th1)
+```
+
+```{r}
+# Linear regression for Theory 2
+model_th2 <- lm(`Theory 2 - Expected Probability` ~ `Theory 2 - #used attributes`, data = data_clean)
+
+# Summary of the model
+summary(model_th2)
+
+```
+
+```{r}
+#check the values and the updates after and before experiments
+data_theory1 <- data_clean %>%
+  select(
+    game_name=`game name`,
+    start_time=start_time2,
+    end_time=end_time2,
+    time_difference=time_required,
+    Th2_Omega_Alternative = `Theory 2 - Omega & Alternative Expected Value`,
+    Th2_Expected = `Theory 2 - Expected Probability`,
+    Th1_Omega_Alternative = `Theory 1 - Omega & Alternative Expected Value`,
+    Th1_Expected = `Theory 1 - Expected Probability`,
+    Experiments_done = experiments_done,
+    th_experiment1=th_experiments_1,
+    th_experiment2=th_experiments_2,
+    certain_values = certain_value,
+    first_exp_certain = first_exp_fin_prob,
+    last_exp_value = last_expected_value,
+    fin_exp_draw=`final exp draw`,
+    player_decision= `player decision`,
+    result=result_binary
+  )
+
+#converting the final signal into a percentage
+data_theory1<-data_theory1%>%
+  mutate(fin_exp_draw=as.numeric(fin_exp_draw)/100,
+         th_experiment1=as.numeric(th_experiment1),
+         th_experiment2=as.numeric(th_experiment2)
+         )
+
+data_theory1<-data_theory1%>%
+  mutate(adjustment = case_when(
+      is.na(th_experiment2) & th_experiment1 == 1 ~ last_exp_value - Th1_Expected,
+      is.na(th_experiment2) & th_experiment1 != 1 ~ last_exp_value - Th2_Expected,
+      th_experiment2 == 1 ~ last_exp_value - Th1_Expected,
+      th_experiment2 != 1 ~ last_exp_value - Th2_Expected
+    ),
+    #signal=case_when(
+     # player_decision==1 ~ fin_exp_draw-Th1_Expected,
+      #player_decision==2 ~ fin_exp_draw-Th2_Expected
+    #)
+    signal=case_when(
+     is.na(th_experiment2) & th_experiment1==1 ~ fin_exp_draw-Th1_Expected,
+     is.na(th_experiment2) & th_experiment1!=1 ~ fin_exp_draw-Th2_Expected,
+     th_experiment2==1 ~ fin_exp_draw-Th1_Expected,
+     th_experiment2!=1 ~ fin_exp_draw-Th2_Expected)
+  )
+```
+
+```{r}
+summary(data_theory1$adjustment)
+
+model_theory_1 <- lm(adjustment ~ time_difference + signal, data = data_theory1)
+
+# Summary of the model
+summary(model_theory_1)
+```
+
+```{r}
+max_y <- 1.2 * mean(data_theory1$adjustment)
+
+hist(data_theory1$adjustment,
+     main = "Histogram of adjustment",
+     xlab = "adjustment",
+     ylab = "Frequency",
+     col = "lightblue",  # Fill color
+     border = "black",
+     ylim=c(0,2.75),
+     prob=TRUE)  # Border color
+
+curve(dnorm(x, mean = mean(data_theory1$adjustment), sd = sd(data_theory1$adjustment)),
+      col = "red",  # Line color
+      lwd = 2,  # Line width
+      add = TRUE)
+```
+
+```{r}
+hist(data_theory1$signal,
+     main = "Histogram of Signal",
+     xlab = "Signal",
+     ylab = "Frequency",
+     col = "lightblue",  # Fill color
+     border = "black",
+     prob=TRUE)  # Border color
+
+curve(dnorm(x, mean = mean(data_theory1$signal), sd = sd(data_theory1$signal)),
+      col = "red",  # Line color
+      lwd = 2,  # Line width
+      add = TRUE)
+```
+
+```{r}
+ggplot(data_theory1, aes(x = adjustment, y = signal)) +
+  geom_point(color = "blue", alpha = 0.7)+
+  geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed", size = 1) +
+  labs(
+    title = "Scatter Plot of adjustment vs. signal",
+    x = "adjustment",
+    y = "signal"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14),
+    axis.title = element_text(size = 12)
+  )
+```
+
+
+```{r}
+data_clean<-data_clean%>%
+  mutate(time_required2=as.numeric(time_required))
+data_theory1<-data_theory1%>%
+  mutate(time_difference=as.numeric(time_difference))
+```
+
+```{r}
+numeric_data<-data_theory1%>%
+  select(adjustment,signal,time_difference)
+
+# Compute correlation matrix
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+
+# Plotting heatmap
+ggcorrplot(cor_matrix, 
+           method = "circle", 
+           type = "lower", 
+           lab = FALSE, 
+           lab_size = 2.5,  # Adjust font size as needed
+           title = "Correlation Heatmap of Adjustment, Signal, and Time Difference") +
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, margin = margin(t = 10)),  # Adds space below x-axis labels
+    axis.text.y = element_text(margin = margin(r = 10))  # Adds space to the right of y-axis labels
+  )
+```
+
+
+
+

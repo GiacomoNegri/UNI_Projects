@@ -1,0 +1,132 @@
+StartDate,EndDate,Status,Progress,Duration (in seconds),Finished,RecordedDate,ResponseId,DistributionChannel,UserLanguage,Q1,Q2,Q3,Q4,Q5,Q1.1,Q1.2,Q1.3,Q2.1,Q2.2,Q2.3,Q3.1,Q3.3
+Data di inizio,Data di fine,Tipo risposta,Avanzamento,Durata (in secondi),Terminato,Data registrata,ID di risposta,Canale di distribuzione,Lingua dell'utente,Quanti anni hai?,Sesso,Sei cresciuto in Italia?,Qual è il tuo livello di istruzione più alto?,Qual è stato il tuo campo di studio più recente?,"Immagina una provincia italiana ""X"" con una popolazione di circa 350.000 abitanti. Un investitore è interessato al numero di farmacie presenti in X per quantificare se il mercato è saturo o altrimenti, e ha bisogno del tuo aiuto.
+
+
+
+Considerando le informazioni presentate, quante farmacie pensi ci siano nella provincia X?","Immagina una provincia italiana ""X"" con una popolazione di circa 350.000 abitanti. Un investitore è interessato al numero di farmacie presenti in X per quantificare se il mercato è saturo o altrimenti, e ha bisogno del tuo aiuto.
+
+
+
+Di seguito ci sono delle informazioni utili riguardo X, i suoi comuni, e la sua regione:
+
+(Non è necessario scegliere una risposta)","Tenendo conto delle nuove informazioni, quante farmacie pensi ci siano nella provincia X?","Immagina una provincia italiana ""X"" con una popolazione di circa 350.000 abitanti. Un investitore è interessato al numero di farmacie presenti in X per quantificare se il mercato è saturo o altrimenti, e ha bisogno del tuo aiuto.
+
+
+
+Considerando le informazioni presentate, quante farmacie pensi ci siano nella provincia X?","Immagina una provincia italiana ""X"" con una popolazione di circa 350.000 abitanti. Un investitore è interessato al numero di farmacie presenti in X per quantificare se il mercato è saturo o altrimenti, e ha bisogno del tuo aiuto.
+
+
+
+Di seguito ci sono delle informazioni utili riguardo X, i suoi comuni, e la sua regione:
+
+(Non è necessario scegliere una risposta)","Tenendo conto delle nuove informazioni, quante farmacie pensi ci siano nella provincia X?","Immagina una provincia italiana ""X"" con una popolazione di circa 350.000 abitanti. Un investitore è interessato al numero di farmacie presenti in X per quantificare se il mercato è saturo o altrimenti, e ha bisogno del tuo aiuto.
+
+
+
+Considerando le informazioni presentate, quante farmacie pensi ci siano nella provincia X?","Tenendo conto delle nuove informazioni, quante farmacie pensi ci siano nella provincia X?"
+"{""ImportId"":""startDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""endDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""status""}","{""ImportId"":""progress""}","{""ImportId"":""duration""}","{""ImportId"":""finished""}","{""ImportId"":""recordedDate"",""timeZone"":""Europe/Berlin""}","{""ImportId"":""_recordId""}","{""ImportId"":""distributionChannel""}","{""ImportId"":""userLanguage""}","{""ImportId"":""QID25""}","{""ImportId"":""QID27""}","{""ImportId"":""QID28""}","{""ImportId"":""QID29""}","{""ImportId"":""QID30""}","{""ImportId"":""QID1_TEXT""}","{""ImportId"":""QID23""}","{""ImportId"":""QID24_TEXT""}","{""ImportId"":""QID21_TEXT""}","{""ImportId"":""QID7""}","{""ImportId"":""QID3_TEXT""}","{""ImportId"":""QID22_TEXT""}","{""ImportId"":""QID17_TEXT""}"
+07/11/2024 11:27,07/11/2024 11:27,Anteprima sondaggio,100,35,Vero,07/11/2024 11:27,R_2lK9wNspsYi10fX,preview,IT,45 - 54,Femmina,No,Liceo/Tecnico/Professionale,"Arti e Umanistiche (Storia dell'Arte, Letteratura, Filosofia, Arti Visive)
+",102,,9996,,,,,
+07/11/2024 11:29,07/11/2024 11:31,Indirizzo IP,100,105,Vero,07/11/2024 11:31,R_2m4gn2nDlrz2ETo,anonymous,IT,18 - 24,Maschio,Sì,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,80,,130,,
+07/11/2024 11:29,07/11/2024 11:31,Indirizzo IP,100,128,Vero,07/11/2024 11:31,R_8fjETdWX4PvVyeJ,anonymous,EN,18 - 24,Maschio,Sì,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",256,,286,,,,,
+07/11/2024 11:29,07/11/2024 11:32,Indirizzo IP,100,162,Vero,07/11/2024 11:32,R_8qCAYyYOwbJM9XQ,anonymous,,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",95,,80,,,,,
+07/11/2024 11:32,07/11/2024 11:34,Indirizzo IP,100,139,Vero,07/11/2024 11:34,R_2fefeH2C1UTrevW,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,6000,800
+07/11/2024 12:01,07/11/2024 12:02,Indirizzo IP,100,45,Vero,07/11/2024 12:02,R_7QyoLVS1LxcDDwi,anonymous,EN,18 - 24,Maschio,No,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,18,La spesa sanitaria pubblica nella regione è di € 1.880 per residente,38,,
+07/11/2024 12:07,07/11/2024 12:09,Indirizzo IP,100,106,Vero,07/11/2024 12:09,R_2g75Ie6IjyXV3WP,anonymous,EN,18 - 24,Maschio,No,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",120,Il numero di ospedali (grandi e piccoli) nella regione a cui appartiene X è di 92,300,,,,,
+07/11/2024 12:20,07/11/2024 12:22,Indirizzo IP,100,124,Vero,07/11/2024 12:22,R_279w7XmtxwFxDE7,anonymous,EN,18 - 24,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,500,,200,,
+07/11/2024 12:21,07/11/2024 12:25,Indirizzo IP,100,288,Vero,07/11/2024 12:25,R_1aPOqMEm5LNjjvd,anonymous,EN,25 - 34,Maschio,No,Laurea Triennale,Altro,10000,,1000,,,,,
+07/11/2024 12:37,07/11/2024 12:38,Indirizzo IP,100,51,Vero,07/11/2024 12:38,R_8exaEtTPzIzo4C6,anonymous,IT,18 - 24,Femmina,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",70000,,70000,,,,,
+07/11/2024 12:37,07/11/2024 12:39,Indirizzo IP,100,140,Vero,07/11/2024 12:39,R_83yRUzNQnFy14jL,anonymous,EN,25 - 34,Maschio,No,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,,,,350,300
+07/11/2024 12:39,07/11/2024 12:43,Indirizzo IP,100,259,Vero,07/11/2024 12:43,R_4EJU6GFkg2CsQVE,anonymous,EN,18 - 24,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,1000,,20079,,
+07/11/2024 12:54,07/11/2024 13:02,Indirizzo IP,100,491,Vero,07/11/2024 13:02,R_8rwFbexgH1dT2jE,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",70,,110,,,,,
+07/11/2024 13:16,07/11/2024 13:17,Indirizzo IP,100,81,Vero,07/11/2024 13:17,R_2JkscgzkZmxaNsx,anonymous,IT,18 - 24,Femmina,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,50,130
+07/11/2024 15:50,07/11/2024 15:52,Indirizzo IP,100,110,Vero,07/11/2024 15:52,R_8clOzmbyc9QjQKl,anonymous,IT,25 - 34,Maschio,Sì,Laurea Magistrale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",15,Il numero di ospedali (grandi e piccoli) nella regione a cui appartiene X è di 92,90,,,,,
+07/11/2024 15:49,07/11/2024 15:55,Indirizzo IP,100,323,Vero,07/11/2024 15:55,R_8JPxIjjXm8bpaut,anonymous,IT,18 - 24,Maschio,Sì,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,Circa 60,,100,,
+07/11/2024 15:48,07/11/2024 15:58,Indirizzo IP,100,549,Vero,07/11/2024 15:58,R_2IPrduXMuVrDGxj,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,150,200
+07/11/2024 15:56,07/11/2024 15:59,Indirizzo IP,100,181,Vero,07/11/2024 15:59,R_5SghdnSgwPnpJaF,anonymous,EN,35 - 44,Maschio,No,Liceo/Tecnico/Professionale,Altro,,,,,,,I cannot possibly guess that based on the provided information even if I cared about pharmacies in Italy.,200
+07/11/2024 17:29,07/11/2024 17:32,Indirizzo IP,100,181,Vero,07/11/2024 17:32,R_8eQ4C97tI4myXeQ,anonymous,IT,45 - 54,Femmina,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,40,,70,,
+07/11/2024 17:46,07/11/2024 17:48,Indirizzo IP,100,92,Vero,07/11/2024 17:48,R_5i8mB4Qu3gps3cd,anonymous,EN,18 - 24,Altro,No,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",3500,,3500,,,,,
+07/11/2024 18:22,07/11/2024 18:24,Indirizzo IP,100,106,Vero,07/11/2024 18:24,R_8ZHRhSXIB5shTta,anonymous,EN,35 - 44,Maschio,No,Liceo/Tecnico/Professionale,Altro,,,,fuck that. I'm not helping capitalist scum,,84874736,,
+07/11/2024 18:29,07/11/2024 18:31,Indirizzo IP,100,150,Vero,07/11/2024 18:31,R_2r0OzfWcxy0E6jv,anonymous,EN,18 - 24,Femmina,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",100,,100,,,,,
+07/11/2024 19:55,07/11/2024 20:01,Indirizzo IP,100,393,Vero,07/11/2024 20:01,R_2eY3osXAhBKRGqh,anonymous,IT,65 e oltre,Femmina,Sì,Liceo/Tecnico/Professionale,Altro,,,,,,,30,Troppe 
+07/11/2024 20:06,07/11/2024 20:08,Indirizzo IP,100,111,Vero,07/11/2024 20:08,R_2FMZxklI6ivmZFL,anonymous,EN,< 18,Femmina,No,Scuole Media,Altro,,,,35,,50,,
+07/11/2024 20:15,07/11/2024 20:24,Indirizzo IP,100,530,Vero,07/11/2024 20:24,R_308LKO0kljFTgEI,anonymous,EN,45 - 54,Maschio,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,50,,50,,
+07/11/2024 20:30,07/11/2024 20:33,Indirizzo IP,100,203,Vero,07/11/2024 20:33,R_2jVwJx0bYMYUN7w,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",35,,40,,,,,
+07/11/2024 20:48,07/11/2024 20:57,Indirizzo IP,100,542,Vero,07/11/2024 20:57,R_1p3jeMe4A0QgKBZ,anonymous,IT,< 18,Maschio,Sì,Scuole Media,Istruzione,,,,,,,100,150
+07/11/2024 21:12,07/11/2024 21:15,Indirizzo IP,100,132,Vero,07/11/2024 21:15,R_2hdTfDzBc4zjCTf,anonymous,EN,25 - 34,Maschio,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,175,1500
+07/11/2024 21:13,07/11/2024 21:18,Indirizzo IP,100,306,Vero,07/11/2024 21:18,R_8GwRdFh5B5LMy5Q,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,Circa 35,,35,,
+07/11/2024 21:16,07/11/2024 21:19,Indirizzo IP,100,142,Vero,07/11/2024 21:19,R_2kXFKTuC2QRezEb,anonymous,IT,18 - 24,Femmina,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",105,,105,,,,,
+07/11/2024 21:28,07/11/2024 21:32,Indirizzo IP,100,196,Vero,07/11/2024 21:32,R_2hALJv4TWExyEuy,anonymous,IT,45 - 54,Femmina,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,350,,420,,
+07/11/2024 21:56,07/11/2024 21:58,Indirizzo IP,100,106,Vero,07/11/2024 21:58,R_2KSITcEHKnEfUAP,anonymous,IT,18 - 24,Femmina,Sì,Laurea Triennale,"Arti e Umanistiche (Storia dell'Arte, Letteratura, Filosofia, Arti Visive)
+",175,,175,,,,,
+07/11/2024 22:05,07/11/2024 22:06,Indirizzo IP,100,92,Vero,07/11/2024 22:06,R_8dGto4eP2v4F55L,anonymous,IT,18 - 24,Femmina,Sì,Liceo/Tecnico/Professionale,Salute e Medicina,,,,,,,200,150
+07/11/2024 22:04,07/11/2024 22:07,Indirizzo IP,100,185,Vero,07/11/2024 22:07,R_8qpwrWq8aG1eOKW,anonymous,IT,45 - 54,Femmina,Sì,Laurea Magistrale,Salute e Medicina,,,,106,,106,,
+07/11/2024 22:29,07/11/2024 22:33,Indirizzo IP,100,232,Vero,07/11/2024 22:33,R_8NUuqHsM6UDHk7W,anonymous,IT,35 - 44,Femmina,Sì,Liceo/Tecnico/Professionale,Altro,106,Il 43% delle farmacie della regione sono rurali (in comuni con meno di 5.000 residenti),120,,,,,
+07/11/2024 23:01,07/11/2024 23:05,Indirizzo IP,100,257,Vero,07/11/2024 23:05,R_87khieUI9ttvXFM,anonymous,IT,45 - 54,Maschio,Sì,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,56,76
+08/11/2024 08:48,08/11/2024 08:51,Indirizzo IP,100,194,Vero,08/11/2024 08:51,R_27qWqFH6XW4LQ4U,anonymous,IT,45 - 54,Maschio,Sì,Dottorato,Legge e Studi Giuridici,,,,Circa 100,,110,,
+08/11/2024 11:58,08/11/2024 12:02,Indirizzo IP,100,250,Vero,08/11/2024 12:02,R_8LdjV1zYct0kyo7,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,,,,70,100
+08/11/2024 15:06,08/11/2024 15:09,Indirizzo IP,100,184,Vero,08/11/2024 15:09,R_27lmlYfS2bOvjNv,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",50,"The number of public doctors in the region is 8,443",30,,,,,
+09/11/2024 01:12,09/11/2024 01:18,Indirizzo IP,100,346,Vero,09/11/2024 01:18,R_2xyGNoSiWLG3NyN,anonymous,EN,25 - 34,Maschio,No,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,30,,500,,
+09/11/2024 11:35,09/11/2024 11:42,Indirizzo IP,100,432,Vero,09/11/2024 11:42,R_2pG4gvtwVAfdrrP,anonymous,IT,45 - 54,Femmina,Sì,Laurea Magistrale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,,,,40,50
+09/11/2024 23:26,09/11/2024 23:30,Indirizzo IP,100,212,Vero,09/11/2024 23:30,R_8PbchzkSzQLhECm,anonymous,IT,35 - 44,Femmina,Sì,Laurea Triennale,Altro,100,Il numero di comuni nella provincia X è 88,150,,,,,
+09/11/2024 23:44,09/11/2024 23:47,Indirizzo IP,100,174,Vero,09/11/2024 23:47,R_2ugyOnXtWr36oeJ,anonymous,EN,18 - 24,Maschio,No,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,350,,50,,
+09/11/2024 23:47,09/11/2024 23:48,Indirizzo IP,100,80,Vero,09/11/2024 23:48,R_2WnNto52V3Nlzbj,anonymous,IT,25 - 34,Femmina,Sì,Liceo/Tecnico/Professionale,"Arti e Umanistiche (Storia dell'Arte, Letteratura, Filosofia, Arti Visive)
+",350,La regione a cui appartiene X è nel Nord d'Italia,350,,,,,
+10/11/2024 06:56,10/11/2024 06:59,Indirizzo IP,100,192,Vero,10/11/2024 06:59,R_8er9eDikyqePu6t,anonymous,EN,35 - 44,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,80,"La densità di popolazione di X è di 271 persone per km²,Il numero di comuni nella provincia X è 88,Il numero di farmacie in Italia è 20.079,Il numero di residenti nella regione è di 4.256.350,Ci sono 99.000 farmacisti in Italia",88,,
+10/11/2024 07:48,10/11/2024 07:52,Indirizzo IP,100,188,Vero,10/11/2024 07:52,R_8okZYmLMKnnWFYB,anonymous,IT,35 - 44,Maschio,Sì,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",70,,70,,,,,
+10/11/2024 07:51,10/11/2024 07:54,Indirizzo IP,100,189,Vero,10/11/2024 07:54,R_2kcfluJ7jkkNzPQ,anonymous,EN,45 - 54,Femmina,Sì,Laurea Magistrale,Altro,,,,70,,150,,
+10/11/2024 08:16,10/11/2024 08:22,Indirizzo IP,100,335,Vero,10/11/2024 08:22,R_2rxfJVaX3ZNzChI,anonymous,IT,45 - 54,Femmina,Sì,Dottorato,Salute e Medicina,,,,,,,100,50
+10/11/2024 21:46,10/11/2024 21:48,Indirizzo IP,100,148,Vero,10/11/2024 21:48,R_2wVjzD2BvZAAGpr,anonymous,IT,45 - 54,Femmina,Sì,Laurea Triennale,Altro,,,,70,,140,,
+11/11/2024 12:08,11/11/2024 12:11,Indirizzo IP,100,188,Vero,11/11/2024 12:11,R_2no6TmvnCL0V3dF,anonymous,IT,18 - 24,Maschio,Sì,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,40,70
+12/11/2024 14:39,12/11/2024 14:43,Indirizzo IP,100,221,Vero,12/11/2024 14:43,R_13pQUDqsLYyWJtv,anonymous,EN,18 - 24,Maschio,No,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",35,,35,,,,,
+12/11/2024 15:15,12/11/2024 15:20,Indirizzo IP,100,336,Vero,12/11/2024 15:20,R_1KrkWOcn2KeSrnZ,anonymous,EN,25 - 34,Maschio,No,Laurea Magistrale,Altro,,,,20,,300,,
+04/11/2024 11:30,04/11/2024 11:33,Indirizzo IP,100,126,Vero,07/11/2024 11:33,R_2m4gn2nDlrz2ETX,anonymous,IT,45 - 54,Maschio,No,Laurea Magistrale,Altro,469,,456,,,,,
+06/11/2024 12:19,06/11/2024 12:22,Indirizzo IP,100,133,Vero,07/11/2024 12:22,R_8fjETdWX4PvVyeo,anonymous,IT,45 - 54,Femmina,No,Laurea Triennale,"Arti e Umanistiche (Storia dell'Arte, Letteratura, Filosofia, Arti Visive)
+",,,,,,,203,186
+07/11/2024 12:11,07/11/2024 12:15,Indirizzo IP,100,104,Vero,07/11/2024 12:15,R_8qCAYyYOwbJM9XJ,anonymous,EN,25 - 34,Femmina,S�,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",303,,351,,,,,
+05/11/2024 11:55,05/11/2024 12:04,Indirizzo IP,100,111,Vero,07/11/2024 12:04,R_2fefeH2C1UTrevQ,anonymous,IT,35 - 44,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,211,209
+04/11/2024 12:02,04/11/2024 12:04,Indirizzo IP,100,129,Vero,07/11/2024 12:04,R_7QyoLVS1LxcDDwW,anonymous,IT,18 - 24,Maschio,S�,Laurea Magistrale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",202,,244,,,,,
+03/11/2024 11:47,03/11/2024 11:53,Indirizzo IP,100,158,Vero,07/11/2024 11:53,R_2g75Ie6IjyXV3Wi,anonymous,EN,65 e oltre,Maschio,No,Laurea Magistrale,Salute e Medicina,451,,482,,,,,
+07/11/2024 12:23,07/11/2024 12:28,Indirizzo IP,100,120,Vero,07/11/2024 12:28,R_279w7XmtxwFxDEP,anonymous,EN,45 - 54,Femmina,S�,Laurea Magistrale,Salute e Medicina,243,,246,,,,,
+04/11/2024 11:36,04/11/2024 11:42,Indirizzo IP,100,112,Vero,07/11/2024 11:42,R_1aPOqMEm5LNjjv7,anonymous,EN,18 - 24,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,137,,149,,
+07/11/2024 11:35,07/11/2024 11:44,Indirizzo IP,100,152,Vero,07/11/2024 11:44,R_8exaEtTPzIzo4Cd,anonymous,EN,45 - 54,Maschio,S�,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",447,,417,,,,,
+05/11/2024 12:01,05/11/2024 12:03,Indirizzo IP,100,105,Vero,07/11/2024 12:03,R_83yRUzNQnFy14j6,anonymous,IT,25 - 34,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,117,,116,,
+03/11/2024 12:01,03/11/2024 12:10,Indirizzo IP,100,148,Vero,07/11/2024 12:10,R_4EJU6GFkg2CsQVL,anonymous,EN,25 - 34,Maschio,S�,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",433,,390,,,,,
+05/11/2024 12:02,05/11/2024 12:05,Indirizzo IP,100,121,Vero,07/11/2024 12:05,R_8rwFbexgH1dT2jY,anonymous,EN,18 - 24,Maschio,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",184,,200,,,,,
+07/11/2024 12:15,07/11/2024 12:23,Indirizzo IP,100,155,Vero,07/11/2024 12:23,R_2JkscgzkZmxaNsE,anonymous,IT,18 - 24,Femmina,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,244,271
+06/11/2024 11:58,06/11/2024 12:07,Indirizzo IP,100,124,Vero,07/11/2024 12:07,R_8clOzmbyc9QjQKx,anonymous,IT,35 - 44,Maschio,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,102,,93,,
+05/11/2024 11:49,05/11/2024 11:56,Indirizzo IP,100,153,Vero,07/11/2024 11:56,R_8JPxIjjXm8bpaul,anonymous,IT,18 - 24,Maschio,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",492,,527,,,,,
+06/11/2024 11:58,06/11/2024 12:04,Indirizzo IP,100,117,Vero,07/11/2024 12:04,R_2IPrduXMuVrDGxt,anonymous,IT,18 - 24,Maschio,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",424,,395,,,,,
+03/11/2024 11:38,03/11/2024 11:40,Indirizzo IP,100,120,Vero,07/11/2024 11:40,R_8eQ4C97tI4myXej,anonymous,IT,< 18,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,257,194
+07/11/2024 12:21,07/11/2024 12:27,Indirizzo IP,100,100,Vero,07/11/2024 12:27,R_5i8mB4Qu3gps3cF,anonymous,IT,18 - 24,Maschio,S�,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",279,,279,,,,,
+06/11/2024 11:49,06/11/2024 11:51,Indirizzo IP,100,137,Vero,07/11/2024 11:51,R_2r0OzfWcxy0E6jQ,anonymous,EN,18 - 24,Femmina,No,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,281,188
+04/11/2024 12:01,04/11/2024 12:03,Indirizzo IP,100,154,Vero,07/11/2024 12:03,R_2eY3osXAhBKRGqd,anonymous,EN,35 - 44,Femmina,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,96,,102,,
+06/11/2024 11:56,06/11/2024 11:58,Indirizzo IP,100,121,Vero,07/11/2024 11:58,R_2FMZxklI6ivmZFa,anonymous,IT,18 - 24,Maschio,No,Scuole Media,Salute e Medicina,,,,,,,120,49
+03/11/2024 12:15,03/11/2024 12:22,Indirizzo IP,100,130,Vero,07/11/2024 12:22,R_308LKO0kljFTgEv,anonymous,EN,25 - 34,Maschio,No,Laurea Triennale,Altro,146,,123,,,,,
+06/11/2024 11:46,06/11/2024 11:55,Indirizzo IP,100,117,Vero,07/11/2024 11:55,R_2jVwJx0bYMYUN7h,anonymous,EN,18 - 24,Maschio,S�,Laurea Magistrale,"Arti e Umanistiche (Storia dell'Arte, Letteratura, Filosofia, Arti Visive)
+",416,,429,,,,,
+07/11/2024 11:51,07/11/2024 11:58,Indirizzo IP,100,134,Vero,07/11/2024 11:58,R_1p3jeMe4A0QgKBL,anonymous,IT,65 e oltre,Femmina,S�,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,130,,128,,
+05/11/2024 11:39,05/11/2024 11:43,Indirizzo IP,100,103,Vero,07/11/2024 11:43,R_2hdTfDzBc4zjCTI,anonymous,IT,35 - 44,Maschio,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",53,,37,,,,,
+07/11/2024 11:45,07/11/2024 11:47,Indirizzo IP,100,129,Vero,07/11/2024 11:47,R_8GwRdFh5B5LMy5w,anonymous,EN,18 - 24,Femmina,No,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,118,,114,,
+07/11/2024 12:02,07/11/2024 12:07,Indirizzo IP,100,117,Vero,07/11/2024 12:07,R_2kXFKTuC2QRezEZ,anonymous,IT,< 18,Femmina,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,271,328
+07/11/2024 12:07,07/11/2024 12:11,Indirizzo IP,100,124,Vero,07/11/2024 12:11,R_2hALJv4TWExyEuf,anonymous,IT,35 - 44,Maschio,S�,Laurea Triennale,Salute e Medicina,,,,,,,145,161
+04/11/2024 11:38,04/11/2024 11:40,Indirizzo IP,100,123,Vero,07/11/2024 11:40,R_2KSITcEHKnEfUAQ,anonymous,IT,< 18,Maschio,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,75,,89,,
+04/11/2024 11:33,04/11/2024 11:38,Indirizzo IP,100,102,Vero,07/11/2024 11:38,R_8dGto4eP2v4F55b,anonymous,IT,18 - 24,Femmina,S�,Laurea Magistrale,Salute e Medicina,429,,415,,,,,
+04/11/2024 11:40,04/11/2024 11:48,Indirizzo IP,100,138,Vero,07/11/2024 11:48,R_8qpwrWq8aG1eOKy,anonymous,IT,25 - 34,Femmina,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,123,115
+05/11/2024 12:18,05/11/2024 12:22,Indirizzo IP,100,122,Vero,07/11/2024 12:22,R_8NUuqHsM6UDHk7P,anonymous,IT,18 - 24,Maschio,No,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,115,,125,,
+07/11/2024 12:24,07/11/2024 12:32,Indirizzo IP,100,131,Vero,07/11/2024 12:32,R_87khieUI9ttvXFL,anonymous,IT,18 - 24,Femmina,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,,,,198,285
+04/11/2024 11:42,04/11/2024 11:48,Indirizzo IP,100,137,Vero,07/11/2024 11:48,R_27qWqFH6XW4LQ4W,anonymous,IT,25 - 34,Femmina,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",165,,177,,,,,
+04/11/2024 11:31,04/11/2024 11:35,Indirizzo IP,100,102,Vero,07/11/2024 11:35,R_8LdjV1zYct0kyoW,anonymous,IT,45 - 54,Maschio,No,Scuole Media,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,136,,133,,
+06/11/2024 11:38,06/11/2024 11:40,Indirizzo IP,100,159,Vero,07/11/2024 11:40,R_27lmlYfS2bOvjNM,anonymous,IT,35 - 44,Femmina,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",330,,374,,,,,
+07/11/2024 12:18,07/11/2024 12:22,Indirizzo IP,100,150,Vero,07/11/2024 12:22,R_2xyGNoSiWLG3NyU,anonymous,IT,18 - 24,Femmina,S�,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,123,,105,,
+04/11/2024 11:47,04/11/2024 11:52,Indirizzo IP,100,147,Vero,07/11/2024 11:52,R_2pG4gvtwVAfdrr7,anonymous,EN,18 - 24,Femmina,S�,Liceo/Tecnico/Professionale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,173,,176,,
+04/11/2024 12:19,04/11/2024 12:27,Indirizzo IP,100,134,Vero,07/11/2024 12:27,R_8PbchzkSzQLhECv,anonymous,IT,18 - 24,Maschio,S�,Laurea Triennale,Altro,163,,144,,,,,
+06/11/2024 11:42,06/11/2024 11:44,Indirizzo IP,100,109,Vero,07/11/2024 11:44,R_2ugyOnXtWr36oeN,anonymous,IT,65 e oltre,Maschio,S�,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,,,,274,259
+06/11/2024 12:05,06/11/2024 12:11,Indirizzo IP,100,113,Vero,07/11/2024 12:11,R_2WnNto52V3NlzbP,anonymous,EN,25 - 34,Maschio,No,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,196,,202,,
+05/11/2024 12:19,05/11/2024 12:22,Indirizzo IP,100,144,Vero,07/11/2024 12:22,R_8er9eDikyqePu6m,anonymous,IT,45 - 54,Femmina,S�,Laurea Magistrale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",435,,474,,,,,
+07/11/2024 12:24,07/11/2024 12:32,Indirizzo IP,100,104,Vero,07/11/2024 12:32,R_8okZYmLMKnnWFYJ,anonymous,EN,45 - 54,Maschio,No,Laurea Magistrale,Altro,322,,304,,,,,
+05/11/2024 11:40,05/11/2024 11:48,Indirizzo IP,100,105,Vero,07/11/2024 11:48,R_2kcfluJ7jkkNzPj,anonymous,IT,18 - 24,Femmina,S�,Liceo/Tecnico/Professionale,Altro,442,,434,,,,,
+07/11/2024 12:24,07/11/2024 12:30,Indirizzo IP,100,125,Vero,07/11/2024 12:30,R_2rxfJVaX3ZNzCht,anonymous,EN,< 18,Maschio,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",295,,292,,,,,
+07/11/2024 12:01,07/11/2024 12:09,Indirizzo IP,100,155,Vero,07/11/2024 12:09,R_2wVjzD2BvZAAGpB,anonymous,IT,18 - 24,Femmina,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",88,,130,,,,,
+03/11/2024 11:55,03/11/2024 11:59,Indirizzo IP,100,151,Vero,07/11/2024 11:59,R_2no6TmvnCL0V3dK,anonymous,IT,25 - 34,Femmina,No,Laurea Triennale,"Scienze Sociali (Sociologia, Scienze Politiche, Economia)",,,,,,,269,194
+07/11/2024 11:37,07/11/2024 11:40,Indirizzo IP,100,127,Vero,07/11/2024 11:40,R_2no6TmvnCL0V3dZ,anonymous,IT,25 - 34,Maschio,S�,Laurea Triennale,"STEM (Scienza, Tecnologia, Ingegneria, e Matematica)",,,,168,,172,,

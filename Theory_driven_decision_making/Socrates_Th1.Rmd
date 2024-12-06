@@ -1,0 +1,320 @@
+---
+title: "241007_DataAnalysis_2"
+author: "Giacomo Negri"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(lubridate)
+library(jsonlite)
+library(stringr)
+library(psych)
+library(ggcorrplot)
+library(rpart)
+library(rpart.plot)
+
+#Setting the Working Directory
+#setwd("C:/Users/Lenovo/Documents/SCUOLA/UNI/MASTER/1ANNO/20595-BUSINESS ANALYTICS/DATA ANALYSIS")
+
+#Loading the Data
+data <- read_csv("game_records.csv")
+game_headers<- read_csv("games_headers.csv")
+
+data<-data%>%
+  mutate(start_time2=ymd_hms(`start time`),
+         end_time2=ymd_hms(`finish time`),
+         time_required=end_time2-start_time2)
+
+data_theory_empty<-data%>%
+  filter(data[5]=='[]')%>%
+  select(time_required)
+
+cat("Mean time required for those with empty Theory 1: ",mean(data_theory_empty$time_required))
+
+#Removing Empty Theory
+data_clean<-data%>%
+  filter(data[5]!='[]')
+
+#Computing an additional column with result as Binary
+#data_clean<-data
+data_clean<-data_clean%>%
+  mutate(result_binary = ifelse(`result (1 = won)` == "1,,,,,", 1, 0))
+
+#Creating new columns that count the total number of connections, both for theory 1 and 2 together and separately
+data_clean <- data_clean %>%
+  mutate(th1_connections = `Theory 1 - #used attributes` + `Theory 1 - # links`,
+         th2_connections =`Theory 2 - #used attributes`+`Theory 2 - # links`,
+         tot_connections=`Theory 1 - #used attributes` + `Theory 1 - # links`+`Theory 2 - #used attributes`+`Theory 2 - # links`)
+
+#Creating new columns that count the change in connections, attributes and links between theory 1 and 2
+data_clean<-data_clean%>%
+  mutate(tot_connections_change= th1_connections - th2_connections,
+         tot_attributes_change=`Theory 1 - #used attributes` - `Theory 2 - #used attributes`,
+         tot_links_change=`Theory 1 - # links`-`Theory 2 - # links`
+  )
+
+data_clean$tot_attributes <- data_clean$`Theory 1 - #used attributes` + data_clean$`Theory 2 - #used attributes`
+data_clean$tot_links = data_clean$`Theory 1 - # links` + data_clean$`Theory 2 - # links`
+data_clean$timediff = data_clean$`finish time`- data_clean$`start time`
+```
+
+```{r}
+#Extracting the Json experiments columns
+data_clean <- data_clean %>%
+  rowwise() %>%
+  mutate(
+    experiments_done = list(fromJSON(`experiments json`)$exp),
+    
+    #extracting the first experiments
+    th_experiments_1 = case_when(
+      experiments_done[1] == "first" ~ 1,
+      experiments_done[1] == "second" ~ 2,
+      TRUE ~ NA_real_
+    ),
+    
+    #extracting the second experiments if it exists
+    th_experiments_2 = case_when(
+      length(experiments_done) > 1 & experiments_done[2] == "first" ~ 1,
+      length(experiments_done) > 1 & experiments_done[2] == "second" ~ 2,
+      TRUE ~ NA_real_
+    )
+  ) %>%
+  ungroup()
+```
+
+```{r}
+#Extracting the omegas (certain) values from the column experiments
+data_clean <- data_clean %>%
+  rowwise() %>%
+  mutate(
+    # Extract the 'certain' field from the JSON and handle the case where it's missing
+    certain_value = list(fromJSON(`experiments json`)$certain),
+    # Extract the first number from the 'first_certain_value' list
+    first_exp_fin_prob = ifelse(length(certain_value) > 0 && length(certain_value[[1]]) >= 1, 
+                                 certain_value[[1]][1], NA_real_),
+    second_exp_fin_prob = ifelse(length(certain_value) > 0 && length(certain_value[[1]]) >= 2, 
+                                 certain_value[[1]][2], NA_real_)
+  ) %>%
+  ungroup()
+```
+
+```{r}
+#Changing the time format
+data_clean<-data_clean%>%
+  mutate(start_time2=ymd_hms(`start time`),
+         end_time2=ymd_hms(`finish time`))
+
+#Computing the time to play the game
+data_clean<-data_clean%>%
+  mutate(time_required=end_time2-start_time2)
+
+data_clean<-data_clean%>%
+  mutate(time_required_integer=as.numeric(time_required))%>%
+  filter(time_required_integer!=c(284856.00000,17091360))
+
+cat("Mean number of winners: ", mean(data_clean$result_binary))
+```
+
+```{r}
+#Creating a table with the first theories attributes
+th_1_game_headers <- game_headers %>%
+  filter(Theory==1)%>%
+  mutate(th1_num_attributes = str_count(attributes, ",") + 1)
+
+#Creating a table with the second theories attributes
+th_2_game_headers <- game_headers %>%
+  filter(Theory==2)%>%
+  mutate(th2_num_attributes = str_count(attributes, ",") + 1)
+```
+
+```{r}
+#Join th_1_game_headers to data_clean on game_name and Game
+data_clean <- data_clean %>%
+  left_join(th_1_game_headers %>% select(Game, th1_num_attributes),
+            by = c("game name" = "Game"))
+
+#Join th_2_game_headers to data_clean on game_name and Game
+data_clean <- data_clean %>%
+  left_join(th_2_game_headers %>% select(Game, th2_num_attributes),
+            by = c("game name" = "Game"))
+```
+
+```{r}
+#Computing a summary table
+connections_results <- data_clean %>%
+  group_by(`result_binary`) %>%
+  summarise(tot_mean_connections = mean(tot_connections),
+            tot_mean_conn_change=mean(tot_connections_change),
+            tot_mean_att_change=mean(tot_attributes_change),
+            tot_mean_link_change=mean(tot_links_change),
+            th1_mean_attributes=mean(`Theory 1 - #used attributes`),
+            th1_mean_links=mean(`Theory 1 - # links`),
+            th2_mean_attributes=mean(`Theory 2 - #used attributes`),
+            th2_mean_links=mean(`Theory 2 - # links`)
+            )
+
+#Computing Correlations between factors and results
+correlation_table <- tibble(
+  cor_tot_connections = cor(data_clean$tot_connections, data_clean$result_binary, use = "complete.obs"),
+  cor_tot_con_change = cor(data_clean$tot_connections_change, data_clean$result_binary, use = "complete.obs"),
+  cor_tot_link_change = cor(data_clean$tot_links_change, data_clean$result_binary, use = "complete.obs"),
+  cor_th1_connections = cor(data_clean$th1_connections, data_clean$result_binary, use = "complete.obs"),
+  cor_th2_connections = cor(data_clean$th2_connections, data_clean$result_binary, use = "complete.obs"),
+  cor_th1_attributes = cor(data_clean$`Theory 1 - #used attributes`, data_clean$result_binary, use = "complete.obs"),
+  cor_th2_attributes = cor(data_clean$`Theory 2 - #used attributes`, data_clean$result_binary, use = "complete.obs"),
+  cor_th1_links = cor(data_clean$`Theory 1 - # links`, data_clean$result_binary, use = "complete.obs"),
+  cor_th2_links = cor(data_clean$`Theory 2 - # links`, data_clean$result_binary, use = "complete.obs")
+)
+```
+
+```{r}
+#Plotting the density of total connections with respect of result
+
+varlist <- c("th1_connections", "th2_connections", "tot_connections", "tot_connections_change", "tot_attributes_change", "tot_links_change","Theory 1 - # links","Theory 2 - # links","Theory 1 - #used attributes","Theory 2 - #used attributes","Theory 1 - Expected Probability","Theory 2 - Expected Probability","tot_attributes","tot_links","time_required_integer")
+
+for (var in varlist) {
+  p <- ggplot(data_clean, aes_string(x = as.name(var), fill = "as.factor(result_binary)")) +
+    geom_density(alpha = 0.7, position = "identity") +
+    labs(x = var,
+         y = paste("Density of ",var),
+         fill = "Result (Binary)",
+         title = paste("Density Plot of", var, "Grouped by Game Result")) +
+    theme_minimal()
+
+  print(p)
+}
+```
+
+```{r}
+# Graphs of interest
+#"tot_attributes,tot_links, time_required_integer"
+
+#tot_attributes graphS
+ggplot(data_clean, aes_string(x = "tot_attributes", fill = "as.factor(result_binary)")) +
+    geom_density(alpha = 0.7, position = "identity") +
+    labs(x = "Sum of all Attributes Used",
+         y = "Density of Sum of all Attributes",
+         fill = "Result",
+         title = "Density Plot of the Sum of all Attributes Grouped by Game Result") +
+    theme_minimal()
+
+#tot_links graphS
+ggplot(data_clean, aes_string(x = "tot_links", fill = "as.factor(result_binary)")) +
+    geom_density(alpha = 0.7, position = "identity") +
+    labs(x = "Sum of all Links Created",
+         y = "Density of Sum of all Links",
+         fill = "Result",
+         title = "Density Plot of the Sum of all Links Grouped by Game Result") +
+    theme_minimal()
+
+#time_required_integer
+ggplot(data_clean, aes_string(x = "time_required_integer", fill = "as.factor(result_binary)")) +
+    geom_density(alpha = 0.7, position = "identity") +
+    labs(x = "Play Time",
+         y = "Density of Play Time",
+         fill = "Result",
+         title = "Density Plot of the Play Time Grouped by Game Result") +
+    theme_minimal()
+
+```
+
+
+```{r}
+#Computing the correlation between Used Attributes and associated Expected Probability
+corr_att_exp_prob<-tibble(
+  cor_th1_attributes=cor(data_clean$`Theory 1 - #used attributes`,data_clean$`Theory 1 - Expected Probability`),
+  cor_th2_attributes=cor(data_clean$`Theory 2 - #used attributes`,data_clean$`Theory 2 - Expected Probability`)
+)
+```
+
+```{r}
+#Drawing a Scatter plot
+
+# Scatter plot for Theory 1
+ggplot(data_clean, aes(x = `Theory 1 - #used attributes`, y = `Theory 1 - Expected Probability`)) +
+  geom_point() +  # Scatter plot points
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +  # Fitting line (linear model)
+  labs(x = "Theory 1 - #used attributes", 
+       y = "Theory 1 - Expected Probability",
+       title = "Scatter Plot of Theory 1 - Attributes vs Expected Probability with Fitting Line") +
+  theme_minimal()
+
+# Scatter plot for Theory 2
+ggplot(data_clean, aes(x = `Theory 2 - #used attributes`, y = `Theory 2 - Expected Probability`)) +
+  geom_point() +  # Scatter plot points
+  geom_smooth(method = "lm", se = FALSE, color = "red") +  # Fitting line (linear model)
+  labs(x = "Theory 2 - #used attributes", 
+       y = "Theory 2 - Expected Probability",
+       title = "Scatter Plot of Theory 2 - Attributes vs Expected Probability with Fitting Line") +
+  theme_minimal()
+```
+
+```{r}
+#Computing the expected probabilities by number of Attributes for Theory 1
+th1_exp_att_by_attr<-data_clean%>%
+  group_by(`Theory 1 - #used attributes`)%>%
+  summarize(mean_exp_probabilities=mean(`Theory 1 - Expected Probability`),
+            var_exp_probabilities=var(`Theory 1 - Expected Probability`)
+            )
+#Computing the expected probabilities by number of Attributes for Theory 1
+th2_exp_att_by_attr<-data_clean%>%
+  group_by(`Theory 2 - #used attributes`)%>%
+  summarize(mean_exp_probabilities=mean(`Theory 2 - Expected Probability`),
+            var_exp_probabilities=var(`Theory 2 - Expected Probability`)
+            )
+```
+
+```{r}
+#Changing the label to the binary result
+data_clean$result_binary <- factor(data_clean$result_binary, 
+                                   levels = c(0, 1), 
+                                   labels = c("Loss", "Won"))
+```
+
+```{r}
+#Creating first classification tree version
+tree1 = rpart(result_binary ~ tot_connections + timediff,data = data_clean, method = 'class', control = rpart.control(minbucket = 15))
+rpart.plot(tree1)
+
+#Creating Filtered version of the tree
+tree2 = rpart(result_binary ~ tot_connections + timediff,data = data_clean[data_clean$timediff > 10,], method = 'class', control = rpart.control(minbucket = 20))
+rpart.plot(tree2)
+
+#Not filtered second tree
+tree2 = rpart(result_binary ~ tot_connections + timediff,data = data_clean, method = 'class', control = rpart.control(minbucket = 20))
+rpart.plot(tree2)
+```
+
+```{r}
+data_clean<-data_clean%>%
+  mutate(result_binary = ifelse(`result (1 = won)` == "1,,,,,", 1, 0))
+
+numeric_data <- data_clean %>% 
+  select(result_binary,tot_attributes,tot_links,time_required_integer)
+
+# Compute correlation matrix
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+
+# Plotting heatmap
+ggcorrplot(cor_matrix, 
+           method = "circle", 
+           type = "lower", 
+           lab = FALSE, 
+           lab_size = 2.5,  # Adjust font size as needed
+           title = "Correlation Heatmap of Continuous Variables", 
+           tl.cex = 10) +
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, margin = margin(t = 10)),  # Adds space below x-axis labels
+    axis.text.y = element_text(margin = margin(r = 10))  # Adds space to the right of y-axis labels
+  )
+```
+
+
+
+
+
+
+

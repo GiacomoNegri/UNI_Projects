@@ -1,0 +1,181 @@
+---
+title: "Shock_Analysis"
+author: "Giacomo Negri"
+date: "`r Sys.Date()`"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(lubridate)
+library(jsonlite)
+library(stringr)
+library(psych)
+library(ggcorrplot)
+library(openxlsx)
+library(stringr)
+
+# Loading csv
+setwd("C:/Users/Lenovo/Documents/SCUOLA/UNI/MASTER/1ANNO/20595-BUSINESS ANALYTICS/DATA ANALYSIS/Shock_analysis")
+
+data<-read_csv("141124_Data_Analysis.csv")
+data_theory<-read_csv("141124_Data_Analysis_Theories.csv")
+```
+
+```{r}
+#EDA analysis
+str(data)
+summary(data)
+head(data)
+
+# Check for missing values
+missing_vals <- colSums(is.na(data))
+missing_vals
+
+# Plot histograms for each numeric variable
+numeric_columns <- select_if(data, is.numeric)
+numeric_columns_long <- gather(numeric_columns, key = "Variable", value = "Value")
+
+mean_values <- data %>%
+  group_by(group) %>%
+  summarise(
+    mean_V1 = mean(V_1, na.rm = TRUE),
+    mean_V2 = mean(V_2, na.rm = TRUE),
+    mean_Vdiff=mean(V_diff,na.rm=TRUE),
+    mean_SD1=mean(SD_1, na.rm=TRUE),
+    mean_SD2=mean(SD_2, na.rm=TRUE),
+    mean_SDdiff=mean(SD_diff, na.rm=TRUE)
+  )
+
+# Bar plot to see the distribution of groups
+ggplot(data, aes(x = as.factor(group))) +
+  geom_bar(fill = "lightgreen", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of Groups", x = "Group", y = "Count")
+
+# Correlation matrix for numeric columns
+numeric_columns<-numeric_columns%>%
+  select(-`Unique ID`,-`Sr. No.`,-`V_1`,-`V_2`,-`V_diff_nonabs`,-`SD_diff`)
+cor_matrix <- cor(numeric_columns, use = "complete.obs")
+ggcorrplot::ggcorrplot(cor_matrix, lab = FALSE, type = "lower", 
+                       title = "Correlation Matrix of Numeric Variables")
+
+# Boxplot of differences (V_diff and SD_diff) by group
+ggplot(data, aes(x = as.factor(group), y = V_diff, fill = as.factor(group))) +
+  geom_boxplot() +
+  theme_minimal() +
+  scale_fill_discrete(
+    name = "Group Label",
+    labels = c("no treatment/no shock", " no treatment/shock", "treatment/no shock", "treatment/shock")  # Custom labels for each group
+  )+
+  labs(title = "Absolute Change (V_diff) by Group", x = "Group", y = "Change")
+
+ggplot(data, aes(x = as.factor(group), y = V_diff_nonabs, fill = as.factor(group))) +
+  geom_boxplot() +
+  theme_minimal() +
+  scale_fill_discrete(
+    name="Group Label",
+    labels = c("no treatment/no shock", " no treatment/shock", "treatment/no shock", "treatment/shock"
+  ))+
+  labs(title = "Actual Change by Group", x = "Group", y = "Actual Change")
+
+# Boxplot of Algorithmic_aversion and Algorithmic_liking by group
+ggplot(data, aes(x = as.factor(group), y = Algorithmic_aversion, fill = as.factor(group))) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Algorithmic Aversion by Group", x = "Group", y = "Algorithmic Aversion")
+
+ggplot(data, aes(x = as.factor(group), y = Algorithmic_liking, fill = as.factor(group))) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Algorithmic Liking by Group", x = "Group", y = "Algorithmic Liking")
+
+# Histograms for GPT Usage and Familiarity
+ggplot(data, aes(x = GPT_Usage)) +
+  geom_histogram(bins = 20, fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of GPT Usage", x = "GPT Usage", y = "Frequency")
+
+ggplot(data, aes(x = GPT_Familiarity)) +
+  geom_histogram(bins = 20, fill = "purple", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of GPT Familiarity", x = "GPT Familiarity", y = "Frequency")
+
+# Boxplot of Confidence by Group
+ggplot(data, aes(x = as.factor(group), y = Confidence, fill = as.factor(group))) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Confidence by Group", x = "Group", y = "Confidence")
+
+# To save cleaned dataset (if necessary)
+#write_csv(data, "cleaned_data.csv")
+```
+
+```{r}
+#Descriptive statistics
+
+numeric_stats <- data %>%
+  select_if(is.numeric) %>%
+  summarise_all(list(
+    mean = ~mean(., na.rm = TRUE),
+    median = ~median(., na.rm = TRUE),
+    sd = ~sd(., na.rm = TRUE),
+    min = ~min(., na.rm = TRUE),
+    max = ~max(., na.rm = TRUE),
+    missing_count = ~sum(is.na(.))
+  ))
+
+# Print descriptive statistics for numeric variables
+print("Descriptive Statistics for Numeric Variables:")
+print(numeric_stats)
+
+# Descriptive Statistics for Categorical Variables  
+categorical_stats <- data %>%
+  select_if(is.factor) %>%
+  summarise_all(list(
+    count = ~length(.),
+    unique_values = ~n_distinct(.),
+    missing_count = ~sum(is.na(.))
+  ))
+
+# Print descriptive statistics for categorical variables
+print("Descriptive Statistics for Categorical Variables:")
+print(categorical_stats)
+
+# Frequency tables for each categorical variable
+categorical_vars <- data %>% select_if(is.factor)
+
+cat("Frequency Tables for Categorical Variables:\n")
+for (colname in colnames(categorical_vars)) {
+  cat("\nFrequency table for", colname, ":\n")
+  print(table(categorical_vars[[colname]], useNA = "ifany"))
+}
+```
+
+```{r}
+#regeression
+# Linear regression to predict V_diff from numeric_column
+numeric_columns <- select_if(data, is.numeric)
+
+numeric_columns1<-numeric_columns%>%
+  select(-`Unique ID`,-`Sr. No.`,-`V_1`,-`V_2`,-`V_diff_nonabs`,-`SD_diff`,-`group`,-`SD_1`,-`SD_2`,-`Algorithmic_aversion`)
+
+numeric_columns2<-numeric_columns%>%
+  select(-`Unique ID`,-`Sr. No.`,-`V_1`,-`V_2`,-`V_diff`,-`SD_diff`,-`group`,-`SD_1`,-`SD_2`,-`Algorithmic_aversion`)
+
+# Fit the linear regression model
+model1 <- lm(V_diff ~ .+Aristotle:Shock, data = numeric_columns1)
+model2 <- lm(V_diff_nonabs ~ .+Aristotle:Shock, data = numeric_columns2)
+
+# Summarize the model to view the results
+summary(model1)
+summary(model2)
+```
+
+
+
+

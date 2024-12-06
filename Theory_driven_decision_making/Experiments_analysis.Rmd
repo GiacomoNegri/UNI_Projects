@@ -1,0 +1,228 @@
+---
+title: "Experimental_Analysis"
+author: "Giacomo Negri"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(lubridate)
+library(jsonlite)
+library(stringr)
+library(psych)
+library(ggcorrplot)
+library(openxlsx)
+library(stringr)
+library(stringi)
+
+exp_data<-read_csv("Finished_Survey_Results.csv")
+exp_data <- exp_data[-c(1, 2), ]
+
+#Changing column Header name
+column_names<-c("Start_datetime", "End_datetime", "Status", "Progress_percentage",
+                "Durations_sec", "Finished", "Recorded_datetime", "ResponseID",
+                "Distribution_channel", "UserLanguage", "Age", "Sex", "Italian",
+                "Education","field_study","baseline_T1","T1","final_T1","baseline_T2","T2",
+                "final_T2","baseline_T3", "final_T3")
+
+colnames(exp_data)<-column_names
+
+#Invalid Answers
+exp_data<-exp_data%>%
+  filter(ResponseID!=c('R_8ZHRhSXIB5shTta','R_5SghdnSgwPnpJaF'),
+         Distribution_channel!="preview",
+         Finished=="Vero",
+         Progress_percentage==100)
+
+#Mutating the column 'Italian'
+exp_data<-exp_data%>%
+  mutate(Italian=ifelse(Italian=="Sì","Yes","No"),
+         Sex=ifelse(Sex=="Maschio","Male",
+                    ifelse(Sex=="Femmina","Female","Other")),
+         Age=ifelse(Age=="65 e oltre","65 and above",Age)
+         )
+
+education_map = c(
+    "Dottorato"="PhD",
+    "Laurea Triennale"="Bachelor' Degree",
+    "Laurea Magistrale"="Master' Degree ",
+    "Liceo/Tecnico/Professionale"="High School",
+    "Scuole Media"="Middle School"
+)
+
+field_map <- c(
+  "STEM (Scienza, Tecnologia, Ingegneria, e Matematica)" = "STEM (Science, Technology, Engineering, and Mathematics)",
+  "Arti e Umanistiche (Storia dell'Arte, Letteratura, Filosofia, Arti Visive)" = "Arts and Humanities (Art History, Literature, Philosophy, Visual Arts)",
+  "Scienze Sociali (Sociologia, Scienze Politiche, Economia)" = "Social Sciences (Psychology, Sociology, Political Science, Economics)",
+  "Salute e Medicina" = "Health and Medicine",
+  "Istruzione" = "Education",
+  "Legge e Studi Giuridici" = "Law and Legal Studies",
+  "Altro" = "Other"
+)
+
+exp_data<-exp_data%>%
+  mutate(Education=education_map[Education],
+         field_study=field_map[field_study])
+
+# exp_data<-exp_data%>%
+#   mutate(field_study=ifelse(is.na(field_study),"STEM (Science, Technology, Engineering, and Mathematics)", field_study))
+```
+
+```{r}
+# Function to create balance plots for specified columns
+plot_balance <- function(data, columns) {
+  for (col in columns) {
+    cat("\nGenerating Plot for:", col, "\n")
+    p <- ggplot(data, aes_string(x = col)) +
+      geom_bar(fill = "skyblue", color = "black") +
+      theme_minimal() +
+      labs(
+        title = paste("Distribution of", col),
+        x = col,
+        y = "Count"
+      ) +
+      theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5)
+      )
+    print(p)
+  }
+}
+
+# Columns to check for balance
+columns_to_check <- c("UserLanguage", "Age", "Sex", "Italian", "Education", "field_study")
+
+# Generate balance plots
+plot_balance(exp_data, columns_to_check)
+
+```
+
+```{r}
+#Reformatting the data
+exp_data<-exp_data%>%
+  mutate(
+    Treatment=case_when(
+      !is.na(baseline_T1)~1,
+      !is.na(baseline_T2)~2,
+      TRUE~3
+    )
+  )
+
+#Unifying the baseline
+exp_data <- exp_data %>%
+  mutate(
+    baseline = if_else(Treatment == 1, baseline_T1,
+                       if_else(Treatment == 2, baseline_T2, baseline_T3)),
+    final=if_else(Treatment == 1, final_T1,
+                       if_else(Treatment == 2, final_T2, final_T3)),
+    attributes=if_else(Treatment == 1, 2,
+                       if_else(Treatment == 2, 5, 12)),
+  )
+```
+
+```{r}
+#Dropped summarized column
+data<- subset(exp_data, select = -c(T1, T2, baseline_T1, baseline_T2, baseline_T3,
+                                    final_T1, final_T2, final_T3))
+```
+
+```{r}
+#try encoding again, because of saving results
+# data <- data %>%
+#   mutate(across(where(is.character), ~ stri_enc_toutf8(.)))
+
+#Polishing data and converting type
+data<-data%>%
+  mutate(
+    baseline = as.integer(str_remove(baseline, "Circa ")),
+    final = as.integer(str_remove(final, "Circa ")),
+    attributes=as.integer(attributes),
+    Treatment=as.integer(Treatment),
+    Durations_sec=as.integer(Durations_sec),
+    Progress_percentage=as.integer(Progress_percentage),
+    pred_change=final-baseline
+  )
+
+#Saving results
+# write.xlsx(data, "results_data.xlsx", sheetName = "Results", rowNames = FALSE)
+```
+
+```{r}
+#computing distances from target and reformatting dates
+data<-data%>%
+  mutate(
+    baseline_dist=140-baseline,
+    final_dist=140-final,
+    Start_datetime = as.POSIXct(Start_datetime, format = "%d/%m/%Y %H:%M", tz = Sys.timezone()),
+    End_datetime = as.POSIXct(End_datetime, format = "%d/%m/%Y %H:%M", tz = Sys.timezone()),
+  )
+```
+
+```{r}
+# removing problematic rows
+problematic_rows <- data %>%
+  filter(map_lgl(across(where(is.character)), ~ any(is.na(stri_enc_isutf8(.)))))
+print(problematic_rows)
+```
+
+```{r}
+exp_data<-exp_data%>%
+  mutate(
+    Treatment=case_when(
+      !is.na(baseline_T1)~1,
+      !is.na(baseline_T2)~2,
+      TRUE~3
+    )
+  )
+
+#Unifying the baseline
+exp_data <- exp_data %>%
+  mutate(
+    baseline = if_else(Treatment == 1, baseline_T1,
+                       if_else(Treatment == 2, baseline_T2, baseline_T3)),
+    final=if_else(Treatment == 1, final_T1,
+                  if_else(Treatment == 2, final_T2, final_T3)),
+    attributes=if_else(Treatment == 1, 2,
+                       if_else(Treatment == 2, 5, 12)),
+  )
+
+# Carica i dati
+data <- exp_data
+
+data$final <- as.numeric(str_remove(data$final,"Circa"))
+data$baseline <- as.numeric(str_remove(data$baseline,"Circa"))
+
+data <- data %>% 
+  mutate(baseline_diff = abs(baseline - 140)/140,
+         final_diff = abs(final -140)/140,
+         Start_datetime = as.POSIXct(Start_datetime, format = "%d/%m/%Y %H:%M", tz = Sys.timezone()),
+         End_datetime = as.POSIXct(End_datetime, format = "%d/%m/%Y %H:%M", tz = Sys.timezone())
+  )
+
+
+
+# Trasforma i dati in formato lungo, con una colonna per periodo e una per il valore
+data_long <- data %>%
+  pivot_longer(cols = c(baseline_diff, final_diff), names_to = "period", values_to = "outcome") %>%
+  mutate(period_dummy = ifelse(period == "final_diff", 1, 0)) %>%
+  filter(!is.na(outcome))  # Rimuove le righe con NA nella variabile outcome
+
+#GRAFICI
+#plot(data$Treatment, data$final_diff, ylim=c(0,20))
+
+# Trasforma la variabile Treatment in dummy, escludendo una categoria come riferimento
+data_long <- data_long %>%
+  mutate(Treatment_5info = ifelse(Treatment == 2, 1, 0),
+         Treatment_12info = ifelse(Treatment == 3, 1, 0))
+
+# Modello con variabili dummy per il trattamento e per il periodo
+model <- lm(outcome ~ Treatment_5info + Treatment_12info + period_dummy + Treatment_5info:period_dummy + Treatment_12info:period_dummy, data = data_long)
+
+# Risultati del modello
+summary(model)
+
+```
+
