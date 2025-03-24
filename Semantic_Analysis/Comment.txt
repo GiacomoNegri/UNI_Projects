@@ -1,0 +1,11 @@
+20597-Natural Language Processing, year 2024/2025
+Giacomo Negri, 3155287
+
+Track I:
+This code use TF-IDF vectorization and cosine similarity. After loading the data, they are lighly preprocessed, removing white spaces, punctuation and lowering capitalized words. Then it was employed a TfidfVectorizer from sklearn. Different n-gram ranges for words and characters were used and then the vectorizers were combined using FeatureUnion. The tuning of the parameters (ngram_range, max_df, min_df, sublinear_tf) was achived by triyng multiple combinations and selecting the most solid one aross different seeds with respect to the BLEU score. The model transforms the processed test prompts into TF-IDF vectors and computes cosine similarity to find the most relevant training prompt response for each test prompt.
+
+Track II:
+This code use word embeddings and cosine similarity. After loading the data, they are lighly preprocessed, as in the previous track. It is then load the pre-trained word2vec-google-news-300 model and defines a function to compute sentence embeddings by averaging word vectors. The previous model was selected for its performance with respect to the BLEU score. The processed test prompts are converted into embeddings, and the cosine similarity is computed to find the closest match. The most similar is then selected.
+
+Track III:
+This code combines semantic and lexical similarities. After loading and preprocessing the data, user prompts are encoded using the pre-trained BERT-based model 'all-mpnet-base-v2' (SentenceTransformer) to generate semantic embeddings. Although slower, this model provides higher-quality results, than for instance 'all-MiniLM-L12-v2'. Lexical similarities are computed using TF-IDF vectorization with word and character n-grams, as in track I. Both semantic and lexical similarities are combined with a weighted average (alpha=0.6), chosen based on its optimal BLEU score. This hybrid approach improves the accuracy of identifying the most relevant response by leveraging both semantic and lexical features.
